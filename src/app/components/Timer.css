@@ -1,0 +1,22 @@
+@keyframes progress {
+    to {
+        stroke-dasharray: 100 100;
+    }
+}
+
+.progress__circle {
+    stroke: blue;
+    stroke-width: 5px;
+    stroke-dasharray: 0 100;
+    transform: rotate(-90deg);
+    transform-origin: 50%;
+    animation: progress 12s linear forwards;
+}
+
+.base__circle {
+    stroke: #f0f0f0;
+    stroke-width: 8px;
+    stroke-dasharray: 100 100;
+    transform: rotate(-90deg);
+    transform-origin: 50%;
+}
