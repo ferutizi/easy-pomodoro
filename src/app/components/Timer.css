@@ -5,16 +5,17 @@
 }
 
 .progress__circle {
-    stroke: blue;
+    stroke: rgb(76, 76, 185);
     stroke-width: 5px;
     stroke-dasharray: 0 100;
     transform: rotate(-90deg);
     transform-origin: 50%;
-    animation: progress 12s linear forwards;
+    animation: progress linear forwards;
+    animation-duration: var(--totalTime);
 }
 
 .base__circle {
-    stroke: #f0f0f0;
+    stroke: hsl(240, 44%, 75%);
     stroke-width: 8px;
     stroke-dasharray: 100 100;
     transform: rotate(-90deg);
