@@ -17,6 +17,9 @@ export default function Timer() {
   //Initial break time
   const [breakMinutes, setBreakMinutes] = useState(0);
   const [breakSeconds, setBreakSeconds] = useState(5);
+  //Initial long break time
+  const [longBreakMinutes, setLongBreakMinutes] = useState(0);
+  const [longBreakSeconds, setLongBreakSeconds] = useState(9);
   //State pomodoro or break
   const [intervalState, setIntervalState] = useState<boolean>(true);
   const [minutes, setMinutes] = useState<number>(pomodoroMinutes);
@@ -54,6 +57,14 @@ export default function Timer() {
       }
   }, [minutes, seconds, isRunning, currentPomodoro]);
 
+  const start = () => {
+    console.log(minutes, seconds)
+    if(minutes > 0 || seconds > 0) {
+      setIsRunning(true);
+      setCircleProgress(true);
+    }
+  }
+
   const reset = () => {
     if(!isRunning) {
       setMinutes(pomodoroMinutes);
@@ -66,10 +77,19 @@ export default function Timer() {
     if(!isRunning) {
       if(!intervalState) {
         setCurrentPomodoro(currentPomodoro + 1);
+        setMinutes(pomodoroMinutes);
+        setSeconds(pomodoroSeconds);
+      } else {
+        if(currentPomodoro === 4) {
+          setMinutes(longBreakMinutes);
+          setSeconds(longBreakSeconds);
+          setCurrentPomodoro(0);
+        } else {          
+          setMinutes(breakMinutes);
+          setSeconds(breakSeconds);
+        }
       }
       setIntervalState(!intervalState);
-      setMinutes(breakMinutes);
-      setSeconds(breakSeconds);
     }
     //inicio descanso
   }
@@ -89,7 +109,7 @@ export default function Timer() {
         <p>
           {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
         </p>
-        <button type='button' onClick={()=> {setIsRunning(true), setCircleProgress(true)}}>Iniciar</button>
+        <button type='button' onClick={()=> start()}>Iniciar</button>
         <button type='button' onClick={()=> reset()}>Reiniciar</button>
         <button type='button' onClick={()=> next()}>Continuar</button>
       </div>
