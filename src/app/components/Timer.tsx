@@ -13,10 +13,10 @@ declare module 'react' {
 export default function Timer() {
   //Initial pomodoro time
   const [pomodoroMinutes, setPomodoroMinutes] = useState(0);
-  const [pomodoroSeconds, setPomodoroSeconds] = useState(12);
+  const [pomodoroSeconds, setPomodoroSeconds] = useState(7);
   //Initial break time
   const [breakMinutes, setBreakMinutes] = useState(0);
-  const [breakSeconds, setBreakSeconds] = useState(10);
+  const [breakSeconds, setBreakSeconds] = useState(5);
   //State pomodoro or break
   const [intervalState, setIntervalState] = useState<boolean>(true);
   const [minutes, setMinutes] = useState<number>(pomodoroMinutes);
@@ -24,7 +24,7 @@ export default function Timer() {
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [circleProgress, setCircleProgress] = useState<boolean>(false);
   const [totalTime, setTotalTime] = useState<number>();
-  const [completedPomodoro, setCompletedPomodoro] = useState<number>(0);
+  const [currentPomodoro, setCurrentPomodoro] = useState<number>(1);
 
   useEffect(() => {
     if(isRunning) {
@@ -40,7 +40,6 @@ export default function Timer() {
                 setIsRunning(false);
                 setCircleProgress(false);
                 clearInterval(countDown);
-                setCompletedPomodoro(completedPomodoro + 1)
                 return;
               }
               setSeconds(59);
@@ -53,26 +52,32 @@ export default function Timer() {
             clearInterval(countDown);
           };
       }
-  }, [minutes, seconds, isRunning, completedPomodoro]);
+  }, [minutes, seconds, isRunning, currentPomodoro]);
 
   const reset = () => {
     if(!isRunning) {
       setMinutes(pomodoroMinutes);
       setSeconds(pomodoroSeconds);
-      setCompletedPomodoro(0);
+      setCurrentPomodoro(1);
     }
   }
 
   const next = () => {
-    setMinutes(breakMinutes);
-    setSeconds(breakSeconds);
+    if(!isRunning) {
+      if(!intervalState) {
+        setCurrentPomodoro(currentPomodoro + 1);
+      }
+      setIntervalState(!intervalState);
+      setMinutes(breakMinutes);
+      setSeconds(breakSeconds);
+    }
     //inicio descanso
   }
 
   return (
     <>
       <h2>{intervalState ? 'Pomodoro' : 'Descanso'}</h2>
-      <h2>{completedPomodoro}</h2>
+      <h2>{currentPomodoro}</h2>
       <svg width="300" height="300">
         <circle className='base__circle' r="130" cx="50%" cy="50%" pathLength="100" />
         { circleProgress ?
