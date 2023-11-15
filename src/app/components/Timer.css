@@ -4,6 +4,31 @@
     }
 }
 
+/* 
+    Blue
+    #5A76BF color
+    #89A4E8 fondo
+    #7B96DB contraste
+    #DFE8FF luz
+
+    Red
+    #a83838
+    #e35454
+    #e07676
+    #ffa8a8
+
+    Dark
+    #131313
+    #353539
+    #ccccf5
+
+    Green
+    #318A5F
+    #64d8a0
+    #45de94
+    #adffd8
+ */
+
 .progress__circle {
     stroke: rgb(76, 76, 185);
     stroke-width: 5px;
