@@ -11,29 +11,32 @@ declare module 'react' {
 }
 
 export default function Timer() {
-  //Initial pomodoro time
-  const [pomodoroMinutes, setPomodoroMinutes] = useState(0);
-  const [pomodoroSeconds, setPomodoroSeconds] = useState(7);
-  //Initial break time
-  const [breakMinutes, setBreakMinutes] = useState(0);
-  const [breakSeconds, setBreakSeconds] = useState(5);
-  //Initial long break time
-  const [longBreakMinutes, setLongBreakMinutes] = useState(0);
-  const [longBreakSeconds, setLongBreakSeconds] = useState(9);
+  //Initial interval times
+  const [pomodoroMinutes, setPomodoroMinutes] = useState<number>(0);
+  const [pomodoroSeconds, setPomodoroSeconds] = useState<number>(6);
+  const [breakMinutes, setBreakMinutes] = useState<number>(0);
+  const [breakSeconds, setBreakSeconds] = useState<number>(5);
+  const [longBreakMinutes, setLongBreakMinutes] = useState<number>(0);
+  const [longBreakSeconds, setLongBreakSeconds] = useState<number>(9);
   //State pomodoro or break
   const [intervalState, setIntervalState] = useState<boolean>(true);
+  //Set initial time
   const [minutes, setMinutes] = useState<number>(pomodoroMinutes);
   const [seconds, setSeconds] = useState<number>(pomodoroSeconds);
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [circleProgress, setCircleProgress] = useState<boolean>(false);
+  const [animationPause, setAnimationPause] = useState<boolean>(true);
   const [totalTime, setTotalTime] = useState<number>();
   const [currentPomodoro, setCurrentPomodoro] = useState<number>(1);
+  //boton de iniciar
+  const [startButton, setStartButton] = useState<boolean>(true);
 
   useEffect(() => {
-    if(isRunning) {
+    if(circleProgress) {
       setTotalTime(minutes * 60 + seconds);
+      console.log('a')
     }
-  },[isRunning]);
+  },[circleProgress]);
 
   useEffect(() => {
       if(isRunning) {
@@ -58,23 +61,42 @@ export default function Timer() {
   }, [minutes, seconds, isRunning, currentPomodoro]);
 
   const start = () => {
-    console.log(minutes, seconds)
-    if(minutes > 0 || seconds > 0) {
+/*     if(minutes > 0 || seconds > 0) { */
+      setStartButton(false)
+      setAnimationPause(true)
       setIsRunning(true);
       setCircleProgress(true);
-    }
+/*     } */
   }
-
+  
   const reset = () => {
     if(!isRunning) {
+      setStartButton(true)
+      setIsRunning(false);
+      setCircleProgress(false);
       setMinutes(pomodoroMinutes);
       setSeconds(pomodoroSeconds);
       setCurrentPomodoro(1);
     }
   }
 
+  const pause = () => {
+    setIsRunning(!isRunning);
+    if(!animationPause) {
+      /* It is necessary to keep the timer and animation in sync */
+      setTimeout(()=> {
+        setAnimationPause(!animationPause);
+      }, 500)
+    } else {
+      setAnimationPause(!animationPause)
+    }
+  }
+
   const next = () => {
     if(!isRunning) {
+      setStartButton(true)
+      setIsRunning(false);
+      setCircleProgress(false);
       if(!intervalState) {
         setCurrentPomodoro(currentPomodoro + 1);
         setMinutes(pomodoroMinutes);
@@ -96,12 +118,18 @@ export default function Timer() {
 
   return (
     <>
+      <h2 style={{fontSize: '60px'}}>
+        <span style={{color: `${currentPomodoro > 0 ? 'blue' : 'white'}`}}>●</span>
+        <span style={{color: `${currentPomodoro > 1 ? 'blue' : 'white'}`}}>●</span>
+        <span style={{color: `${currentPomodoro > 2 ? 'blue' : 'white'}`}}>●</span>
+        <span style={{color: `${currentPomodoro > 3 ? 'blue' : 'white'}`}}>●</span>
+      </h2>
       <h2>{intervalState ? 'Pomodoro' : 'Descanso'}</h2>
       <h2>{currentPomodoro}</h2>
       <svg width="300" height="300">
         <circle className='base__circle' r="130" cx="50%" cy="50%" pathLength="100" />
         { circleProgress ?
-          <circle style={{"--totalTime": `${totalTime}s`}} className='progress__circle' r="124" cx="50%" cy="50%" pathLength="100" />
+          <circle style={{"--totalTime": `${totalTime}s`, /* "--steps": `${totalTime}`, */ "--pause": `${animationPause ? 'running' : 'paused'}`}} className='progress__circle' r="124" cx="50%" cy="50%" pathLength="100" />
           : null
         }
       </svg>
@@ -109,7 +137,11 @@ export default function Timer() {
         <p>
           {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
         </p>
-        <button type='button' onClick={()=> start()}>Iniciar</button>
+        {
+          startButton
+          ? <button type='button' onClick={()=> start()}>●</button>
+          : <button type='button' onClick={()=> pause()}>{!isRunning ? '●' : '●'}</button>
+        }
         <button type='button' onClick={()=> reset()}>Reiniciar</button>
         <button type='button' onClick={()=> next()}>Continuar</button>
       </div>

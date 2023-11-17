@@ -36,7 +36,9 @@
     transform: rotate(-90deg);
     transform-origin: 50%;
     animation: progress linear forwards;
+/*     animation-timing-function: steps(var(--steps), end); */
     animation-duration: var(--totalTime);
+    animation-play-state: var(--pause);
 }
 
 .base__circle {
