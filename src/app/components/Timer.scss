@@ -1,37 +1,15 @@
+@import '../sass/variables';
+
 @keyframes progress {
     to {
         stroke-dasharray: 100 100;
     }
 }
 
-/* 
-    Blue
-    #5A76BF color
-    #89A4E8 fondo
-    #7B96DB contraste
-    #DFE8FF luz
-
-    Red
-    #a83838
-    #e35454
-    #e07676
-    #ffa8a8
-
-    Dark
-    #131313
-    #353539
-    #ccccf5
-
-    Green
-    #318A5F
-    #64d8a0
-    #45de94
-    #adffd8
- */
-
 .progress__circle {
-    stroke: rgb(76, 76, 185);
-    stroke-width: 5px;
+    fill: $blue-secondary;
+    stroke: $blue-primary;
+    stroke-width: 8px;
     stroke-dasharray: 0 100;
     transform: rotate(-90deg);
     transform-origin: 50%;
@@ -42,9 +20,20 @@
 }
 
 .base__circle {
-    stroke: hsl(240, 44%, 75%);
+    fill: $blue-secondary;
     stroke-width: 8px;
     stroke-dasharray: 100 100;
     transform: rotate(-90deg);
     transform-origin: 50%;
 }
+
+/* ---------------------------------------------------- */
+
+.button--start, .button--pause, .button--reset, .button--next {
+    width: 60px;
+    height: 60px;
+    border-radius: 9px;
+    background-color: $blue-light;
+}
+
+
