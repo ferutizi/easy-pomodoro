@@ -120,13 +120,13 @@ export default function Timer() {
   return (
     <>
       <h2 style={{fontSize: '60px'}}>
-        <span style={{color: `${currentPomodoro > 0 ? 'blue' : 'white'}`}}>●</span>
-        <span style={{color: `${currentPomodoro > 1 ? 'blue' : 'white'}`}}>●</span>
-        <span style={{color: `${currentPomodoro > 2 ? 'blue' : 'white'}`}}>●</span>
-        <span style={{color: `${currentPomodoro > 3 ? 'blue' : 'white'}`}}>●</span>
+        <span className='pomodoro--current' style={{color: `${currentPomodoro > 0 ? 'blue' : 'white'}`}}>●</span>
+        <span className='pomodoro--current' style={{color: `${currentPomodoro > 1 ? 'blue' : 'white'}`}}>●</span>
+        <span className='pomodoro--current' style={{color: `${currentPomodoro > 2 ? 'blue' : 'white'}`}}>●</span>
+        <span className='pomodoro--current' style={{color: `${currentPomodoro > 3 ? 'blue' : 'white'}`}}>●</span>
       </h2>
-      <h2>{intervalState ? 'Pomodoro' : 'Descanso'}</h2>
-      <h2>{currentPomodoro}</h2>
+{/*       <h2>{intervalState ? 'Pomodoro' : 'Descanso'}</h2>
+      <h2>{currentPomodoro}</h2> */}
       <div className='timer--clock'>
         <svg width="300" height="300">
           <circle className='base__circle' r="130" cx="50%" cy="50%" pathLength="100" />
@@ -146,14 +146,22 @@ export default function Timer() {
           </p>
         </div>
       </div>
-      <div>
-        {
-          startButton
-          ? <button className='button--start' type='button' onClick={()=> start()}>●</button>
-          : <button className='button--pause' type='button' onClick={()=> pause()}>{!isRunning ? '●' : '●'}</button>
-        }
+      <div className='timer--buttons'>
         <button className='button--reset' type='button' onClick={()=> reset()}>Reiniciar</button>
+        <div>
+          {
+            startButton
+            ? <button className='button--start' type='button' onClick={()=> start()}>Start</button>
+            : <button className='button--pause' type='button' onClick={()=> pause()}>{!isRunning ? 'Play' : 'Pause'}</button>
+          }
+        </div>
         <button className='button--next' type='button' onClick={()=> next()}>Continuar</button>
+      </div>
+      <div className='flex justify-between w-full'>
+        <button type='button' className='button--theme'>B</button>
+        <button type='button' className='button--theme'>R</button>
+        <button type='button' className='button--theme'>D</button>
+        <button type='button' className='button--theme'>G</button>
       </div>
     </>
   );
