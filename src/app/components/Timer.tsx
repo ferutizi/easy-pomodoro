@@ -1,6 +1,7 @@
 'use client'
 
 import '../sass/_variables.scss';
+import Themes from './Themes';
 import './Timer.scss'
 import {useState, useEffect} from 'react';
 import 'react';
@@ -31,6 +32,9 @@ export default function Timer() {
   const [currentPomodoro, setCurrentPomodoro] = useState<number>(1);
   //boton de iniciar
   const [startButton, setStartButton] = useState<boolean>(true);
+  //theme
+  const [showThemes, setShowThemes] = useState<boolean>(true);
+
 
   useEffect(() => {
     if(circleProgress) {
@@ -119,15 +123,23 @@ export default function Timer() {
 
   return (
     <>
-      <h2 style={{fontSize: '60px'}}>
-        <span className='pomodoro--current' style={{color: `${currentPomodoro > 0 ? 'blue' : 'white'}`}}>●</span>
-        <span className='pomodoro--current' style={{color: `${currentPomodoro > 1 ? 'blue' : 'white'}`}}>●</span>
-        <span className='pomodoro--current' style={{color: `${currentPomodoro > 2 ? 'blue' : 'white'}`}}>●</span>
-        <span className='pomodoro--current' style={{color: `${currentPomodoro > 3 ? 'blue' : 'white'}`}}>●</span>
-      </h2>
+      <section className='flex flex-col w-full justify-between'>
+        <div className='flex w-full justify-between'>
+          <h1>Easy pomodoro</h1>
+          <p>Q</p>
+        </div>
+        <div className='flex justify-center'>
+          <h2 style={{fontSize: '60px'}}>
+            <span className='pomodoro--current' style={{color: `${currentPomodoro > 0 ? 'blue' : 'white'}`}}>●</span>
+            <span className='pomodoro--current' style={{color: `${currentPomodoro > 1 ? 'blue' : 'white'}`}}>●</span>
+            <span className='pomodoro--current' style={{color: `${currentPomodoro > 2 ? 'blue' : 'white'}`}}>●</span>
+            <span className='pomodoro--current' style={{color: `${currentPomodoro > 3 ? 'blue' : 'white'}`}}>●</span>
+          </h2>
+        </div>
+      </section>
 {/*       <h2>{intervalState ? 'Pomodoro' : 'Descanso'}</h2>
       <h2>{currentPomodoro}</h2> */}
-      <div className='timer--clock'>
+      <section className='timer--clock'>
         <svg width="300" height="300">
           <circle className='base__circle' r="130" cx="50%" cy="50%" pathLength="100" />
           { circleProgress ?
@@ -145,24 +157,21 @@ export default function Timer() {
             {seconds.toString().padStart(2, '0')}
           </p>
         </div>
-      </div>
-      <div className='timer--buttons'>
-        <button className='button--reset' type='button' onClick={()=> reset()}>Reiniciar</button>
-        <div>
-          {
-            startButton
-            ? <button className='button--start' type='button' onClick={()=> start()}>Start</button>
-            : <button className='button--pause' type='button' onClick={()=> pause()}>{!isRunning ? 'Play' : 'Pause'}</button>
-          }
+      </section>
+      <section className='flex flex-col w-full gap-4 '>
+        <div className='flex gap-10 justify-center'>
+          <button className='button--reset' type='button' onClick={()=> reset()}>Reiniciar</button>
+          <div>
+            {
+              startButton
+              ? <button className='button--start' type='button' onClick={()=> start()}>Start</button>
+              : <button className='button--pause' type='button' onClick={()=> pause()}>{!isRunning ? 'Play' : 'Pause'}</button>
+            }
+          </div>
+          <button className='button--next' type='button' onClick={()=> next()}>Continuar</button>
         </div>
-        <button className='button--next' type='button' onClick={()=> next()}>Continuar</button>
-      </div>
-      <div className='flex justify-between w-full'>
-        <button type='button' className='button--theme'>B</button>
-        <button type='button' className='button--theme'>R</button>
-        <button type='button' className='button--theme'>D</button>
-        <button type='button' className='button--theme'>G</button>
-      </div>
+        <Themes />
+      </section>
     </>
   );
 }
