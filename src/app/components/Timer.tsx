@@ -2,6 +2,7 @@
 
 import '../sass/_variables.scss';
 import Themes from './Themes';
+import './colors.scss';
 import './Timer.scss'
 import {useState, useEffect} from 'react';
 import 'react';
@@ -12,7 +13,7 @@ declare module 'react' {
   }
 }
 
-export default function Timer() {
+export default function Timer({theme, setTheme}) {
   //Initial interval times
   const [pomodoroMinutes, setPomodoroMinutes] = useState<number>(1);
   const [pomodoroSeconds, setPomodoroSeconds] = useState<number>(50);
@@ -32,14 +33,12 @@ export default function Timer() {
   const [currentPomodoro, setCurrentPomodoro] = useState<number>(1);
   //boton de iniciar
   const [startButton, setStartButton] = useState<boolean>(true);
-  //theme
-  const [showThemes, setShowThemes] = useState<boolean>(true);
 
+  const color = theme.color;
 
   useEffect(() => {
     if(circleProgress) {
       setTotalTime(minutes * 60 + seconds);
-      console.log('a')
     }
   },[circleProgress]);
 
@@ -123,18 +122,18 @@ export default function Timer() {
 
   return (
     <>
-      <section className='flex flex-col w-full justify-between'>
+      <section className='flex flex-col w-full justify-around gap-10'>
         <div className='flex w-full justify-between'>
           <h1>Easy pomodoro</h1>
           <p>Q</p>
         </div>
         <div className='flex justify-center'>
-          <h2 style={{fontSize: '60px'}}>
-            <span className='pomodoro--current' style={{color: `${currentPomodoro > 0 ? 'blue' : 'white'}`}}>●</span>
-            <span className='pomodoro--current' style={{color: `${currentPomodoro > 1 ? 'blue' : 'white'}`}}>●</span>
-            <span className='pomodoro--current' style={{color: `${currentPomodoro > 2 ? 'blue' : 'white'}`}}>●</span>
-            <span className='pomodoro--current' style={{color: `${currentPomodoro > 3 ? 'blue' : 'white'}`}}>●</span>
-          </h2>
+          <div className='flex'>
+            <div className={`current--pomodoro ${currentPomodoro > 0 ? `${color}-primary` : 'blue-light'}`}></div>
+            <div className={`current--pomodoro ${currentPomodoro > 1 ? `${color}-primary` : 'blue-light'}`}></div>
+            <div className={`current--pomodoro ${currentPomodoro > 2 ? `${color}-primary` : 'blue-light'}`}></div>
+            <div className={`current--pomodoro ${currentPomodoro > 3 ? `${color}-primary` : 'blue-light'}`}></div>
+          </div>
         </div>
       </section>
 {/*       <h2>{intervalState ? 'Pomodoro' : 'Descanso'}</h2>
@@ -170,7 +169,7 @@ export default function Timer() {
           </div>
           <button className='button--next' type='button' onClick={()=> next()}>Continuar</button>
         </div>
-        <Themes />
+        <Themes theme={theme} setTheme={setTheme} />
       </section>
     </>
   );

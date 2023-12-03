@@ -68,8 +68,11 @@
     }
 }
 
-.pomodoro--current {
-    text-shadow: 0px 3px 0.7px rgba(0, 0, 0, 0.25);
+.current--pomodoro {
+    box-shadow: 0px 3px 0.7px rgba(0, 0, 0, 0.25);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
 }
 
 .button--theme {
