@@ -8,8 +8,6 @@
 }
 
 .progress__circle {
-    fill: $blue-secondary;
-    stroke: $blue-primary;
     stroke-width: 8px;
     stroke-dasharray: 0 100;
     transform: rotate(-90deg);
@@ -21,7 +19,6 @@
 }
 
 .base__circle {
-/*     fill: $blue-secondary; */
     stroke-width: 8px;
     stroke-dasharray: 100 100;
     transform: rotate(-90deg);
@@ -32,7 +29,6 @@
 /* ---------------------------------------------------- */
 
 .timer--clock {
-    font-family: inter ,sans-serif;
     color: #fff;
     text-shadow: $shadow;
     font-weight: 400;
@@ -46,7 +42,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 118px;
+    font-size: 7.375em;
 }
 
 .timer--seconds {
@@ -61,18 +57,8 @@
     width: 60px;
     height: 60px;
     border-radius: 9px;
-    background-color: $blue-light;
     box-shadow: $shadow;
     &:active {
         box-shadow: $shadow-active;
     }
 }
-
-.current--pomodoro {
-    box-shadow: 0px 3px 0.7px rgba(0, 0, 0, 0.25);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-}
-
-
