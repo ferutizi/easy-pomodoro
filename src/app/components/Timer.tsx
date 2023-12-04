@@ -129,10 +129,10 @@ export default function Timer({theme, setTheme}) {
         </div>
         <div className='flex justify-center'>
           <div className='flex'>
-            <div className={`current--pomodoro ${currentPomodoro > 0 ? `${color}-primary` : 'blue-light'}`}></div>
-            <div className={`current--pomodoro ${currentPomodoro > 1 ? `${color}-primary` : 'blue-light'}`}></div>
-            <div className={`current--pomodoro ${currentPomodoro > 2 ? `${color}-primary` : 'blue-light'}`}></div>
-            <div className={`current--pomodoro ${currentPomodoro > 3 ? `${color}-primary` : 'blue-light'}`}></div>
+            <div className={`current--pomodoro ${currentPomodoro > 0 ? `${color}-primary` : `${color}-light`}`}></div>
+            <div className={`current--pomodoro ${currentPomodoro > 1 ? `${color}-primary` : `${color}-light`}`}></div>
+            <div className={`current--pomodoro ${currentPomodoro > 2 ? `${color}-primary` : `${color}-light`}`}></div>
+            <div className={`current--pomodoro ${currentPomodoro > 3 ? `${color}-primary` : `${color}-light`}`}></div>
           </div>
         </div>
       </section>
@@ -140,9 +140,9 @@ export default function Timer({theme, setTheme}) {
       <h2>{currentPomodoro}</h2> */}
       <section className='timer--clock'>
         <svg width="300" height="300">
-          <circle className='base__circle' r="130" cx="50%" cy="50%" pathLength="100" />
+          <circle className={`base__circle ${color}-secondary`} r="130" cx="50%" cy="50%" pathLength="100" />
           { circleProgress ?
-            <circle style={{"--totalTime": `${totalTime}s`, /* "--steps": `${totalTime}`, */ "--pause": `${animationPause ? 'running' : 'paused'}`}} className='progress__circle' r="130" cx="50%" cy="50%" pathLength="100" />
+            <circle style={{"--totalTime": `${totalTime}s`, /* "--steps": `${totalTime}`, */ "--pause": `${animationPause ? 'running' : 'paused'}`}} className={`progress__circle ${color}-secondary ${color}-primary`} r="130" cx="50%" cy="50%" pathLength="100" />
             : null
           }
         </svg>
@@ -159,15 +159,15 @@ export default function Timer({theme, setTheme}) {
       </section>
       <section className='flex flex-col w-full gap-4 '>
         <div className='flex gap-10 justify-center'>
-          <button className='button--reset' type='button' onClick={()=> reset()}>Reiniciar</button>
+          <button className={`button--reset ${color}-light`} type='button' onClick={()=> reset()}>Reiniciar</button>
           <div>
             {
               startButton
-              ? <button className='button--start' type='button' onClick={()=> start()}>Start</button>
-              : <button className='button--pause' type='button' onClick={()=> pause()}>{!isRunning ? 'Play' : 'Pause'}</button>
+              ? <button className={`button--start ${color}-light`} type='button' onClick={()=> start()}>Start</button>
+              : <button className={`button--pause ${color}-light`} type='button' onClick={()=> pause()}>{!isRunning ? 'Play' : 'Pause'}</button>
             }
           </div>
-          <button className='button--next' type='button' onClick={()=> next()}>Continuar</button>
+          <button className={`button--next ${color}-light`} type='button' onClick={()=> next()}>Continuar</button>
         </div>
         <Themes theme={theme} setTheme={setTheme} />
       </section>
