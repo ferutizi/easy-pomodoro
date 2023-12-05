@@ -4,8 +4,9 @@ import '../sass/_variables.scss';
 import Themes from './Themes';
 import './colors.scss';
 import './Timer.scss'
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import 'react';
+import ThemeContext from '../context/ThemeContext';
 
 declare module 'react' {
   interface CSSProperties {
@@ -13,7 +14,8 @@ declare module 'react' {
   }
 }
 
-export default function Timer({theme, setTheme}) {
+
+export default function Timer() {
   //Initial interval times
   const [pomodoroMinutes, setPomodoroMinutes] = useState<number>(1);
   const [pomodoroSeconds, setPomodoroSeconds] = useState<number>(50);
@@ -33,9 +35,10 @@ export default function Timer({theme, setTheme}) {
   const [currentPomodoro, setCurrentPomodoro] = useState<number>(1);
   //boton de iniciar
   const [startButton, setStartButton] = useState<boolean>(true);
-
+  
+  const { theme } = useContext(ThemeContext);
   const color = theme.color;
-
+  
   useEffect(() => {
     if(circleProgress) {
       setTotalTime(minutes * 60 + seconds);
@@ -169,7 +172,7 @@ export default function Timer({theme, setTheme}) {
           </div>
           <button className={`button--next ${color}-light`} type='button' onClick={()=> next()}>Continuar</button>
         </div>
-        <Themes theme={theme} setTheme={setTheme} />
+        <Themes />
       </section>
     </>
   );

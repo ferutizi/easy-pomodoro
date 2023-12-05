@@ -1,10 +1,19 @@
 'use client'
 
-import { useState } from "react";
+import { useState, useContext } from "react";
+import ThemeContext from "../context/ThemeContext";
 
-export default function Themes({setTheme}) {
+export default function Themes() {
     const [showThemes, setShowThemes] = useState<boolean>(true);
-    
+
+    const themeContext = useContext(ThemeContext);
+
+    if (!themeContext) {
+      return null;
+    }
+
+    const { setTheme } = themeContext;
+
     return(
         <div className='flex flex-col items-center'>
           <button type='button' onClick={() => setShowThemes(!showThemes)}>-.-</button>
