@@ -8,7 +8,8 @@ import './Timer.scss'
 import {useState, useEffect, useContext} from 'react';
 import ThemeContext from '../context/ThemeContext';
 import Image from 'next/image'
-import { Arrow, /* Config, */ Next, Pause, Play, Stop } from './svgs';
+import { Next, Pause, Play, Stop } from './svgs';
+import Pomodoros from './Pomodoros';
 
 declare module 'react' {
   interface CSSProperties {
@@ -134,14 +135,7 @@ export default function Timer() {
             alt="Configuration"
           />
         </div>
-        <div className='flex justify-center'>
-          <div className='flex w-44 justify-between'>
-            <div className={`shadow-custom w-9 h-9 rounded-full ${currentPomodoro > 0 ? `${color}-primary` : `${color}-light`}`}></div>
-            <div className={`shadow-custom w-9 h-9 rounded-full ${currentPomodoro > 1 ? `${color}-primary` : `${color}-light`}`}></div>
-            <div className={`shadow-custom w-9 h-9 rounded-full ${currentPomodoro > 2 ? `${color}-primary` : `${color}-light`}`}></div>
-            <div className={`shadow-custom w-9 h-9 rounded-full ${currentPomodoro > 3 ? `${color}-primary` : `${color}-light`}`}></div>
-          </div>
-        </div>
+        <Pomodoros currentPomodoro={currentPomodoro} color={color}/>
       </section>
       <section className='timer--clock'>
         <svg width="300" height="300">

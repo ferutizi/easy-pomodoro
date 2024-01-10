@@ -1,7 +1,7 @@
 'use client'
 import { createContext, useState, ReactNode, Dispatch, SetStateAction} from "react";
 
-type Theme = {
+export type Theme = {
     color: 'blue' | 'red' | 'dark' | 'green';
 }
 
