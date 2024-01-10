@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useContext } from "react";
+import Image from "next/image";
 import ThemeContext from "../context/ThemeContext";
 
 export default function Themes() {
@@ -16,7 +17,14 @@ export default function Themes() {
 
     return(
         <div className='flex flex-col items-center'>
-          <button type='button' onClick={() => setShowThemes(!showThemes)}>-.-</button>
+          <Image
+            className={`arrow--${showThemes ? 'down' : 'up'}`}
+            src={require("../../../public/arrow.png")}
+            width={34}
+            height={8}
+            alt={`${showThemes ? 'Hide color themes' : 'Show color themes'}`}
+            onClick={() => setShowThemes(!showThemes)}
+          />
           {
             showThemes ?
             <div className='flex justify-between w-full'>

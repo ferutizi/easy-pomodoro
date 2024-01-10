@@ -1,12 +1,14 @@
 'use client'
 
+import 'react';
 import '../sass/_variables.scss';
 import Themes from './Themes';
 import './colors.scss';
 import './Timer.scss'
 import {useState, useEffect, useContext} from 'react';
-import 'react';
 import ThemeContext from '../context/ThemeContext';
+import Image from 'next/image'
+import { Arrow, /* Config, */ Next, Pause, Play, Stop } from './svgs';
 
 declare module 'react' {
   interface CSSProperties {
@@ -14,15 +16,14 @@ declare module 'react' {
   }
 }
 
-
 export default function Timer() {
   //Initial interval times
-  const [pomodoroMinutes, setPomodoroMinutes] = useState<number>(1);
-  const [pomodoroSeconds, setPomodoroSeconds] = useState<number>(50);
-  const [breakMinutes, setBreakMinutes] = useState<number>(0);
-  const [breakSeconds, setBreakSeconds] = useState<number>(5);
-  const [longBreakMinutes, setLongBreakMinutes] = useState<number>(0);
-  const [longBreakSeconds, setLongBreakSeconds] = useState<number>(9);
+  const [pomodoroMinutes, setPomodoroMinutes] = useState<number>(25);
+  const [pomodoroSeconds, setPomodoroSeconds] = useState<number>(0);
+  const [breakMinutes, setBreakMinutes] = useState<number>(5);
+  const [breakSeconds, setBreakSeconds] = useState<number>(0);
+  const [longBreakMinutes, setLongBreakMinutes] = useState<number>(15);
+  const [longBreakSeconds, setLongBreakSeconds] = useState<number>(0);
   //State pomodoro or break
   const [intervalState, setIntervalState] = useState<boolean>(true);
   //Set initial time
@@ -33,7 +34,7 @@ export default function Timer() {
   const [animationPause, setAnimationPause] = useState<boolean>(true);
   const [totalTime, setTotalTime] = useState<number>();
   const [currentPomodoro, setCurrentPomodoro] = useState<number>(1);
-  //boton de iniciar
+
   const [startButton, setStartButton] = useState<boolean>(true);
   
   const { theme } = useContext(ThemeContext);
@@ -68,12 +69,10 @@ export default function Timer() {
   }, [minutes, seconds, isRunning, currentPomodoro]);
 
   const start = () => {
-/*     if(minutes > 0 || seconds > 0) { */
       setStartButton(false)
       setAnimationPause(true)
       setIsRunning(true);
       setCircleProgress(true);
-/*     } */
   }
   
   const reset = () => {
@@ -128,7 +127,12 @@ export default function Timer() {
       <section className='flex flex-col w-full justify-around gap-10'>
         <div className='flex w-full justify-between'>
           <h1>Easy pomodoro</h1>
-          <p>Q</p>
+          <Image
+            src={require("../../../public/config.png")}
+            width={36}
+            height={36}
+            alt="Configuration"
+          />
         </div>
         <div className='flex justify-center'>
           <div className='flex w-44 justify-between'>
@@ -139,8 +143,6 @@ export default function Timer() {
           </div>
         </div>
       </section>
-{/*       <h2>{intervalState ? 'Pomodoro' : 'Descanso'}</h2>
-      <h2>{currentPomodoro}</h2> */}
       <section className='timer--clock'>
         <svg width="300" height="300">
           <circle className={`base__circle ${color}-secondary`} r="130" cx="50%" cy="50%" pathLength="100" />
@@ -162,15 +164,17 @@ export default function Timer() {
       </section>
       <section className='flex flex-col w-full gap-4 '>
         <div className='flex gap-10 justify-center'>
-          <button className={`button--reset ${color}-light`} type='button' onClick={()=> reset()}>Reiniciar</button>
+        <Stop className={`icon icon--${color}`} onClick={()=> reset()} />
           <div>
-            {
-              startButton
-              ? <button className={`button--start ${color}-light`} type='button' onClick={()=> start()}>Start</button>
-              : <button className={`button--pause ${color}-light`} type='button' onClick={()=> pause()}>{!isRunning ? 'Play' : 'Pause'}</button>
+            {!startButton 
+              ? (!isRunning 
+                  ? <Play className={`icon icon--${color}`} onClick={()=> pause()} />
+                  : <Pause className={`icon icon--${color}`} onClick={()=> pause()} />
+                ) 
+              : <Play className={`icon icon--${color}`} onClick={()=> start()} />
             }
           </div>
-          <button className={`button--next ${color}-light`} type='button' onClick={()=> next()}>Continuar</button>
+          <Next className={`icon icon--${color}`} onClick={()=> next()} />
         </div>
         <Themes />
       </section>
