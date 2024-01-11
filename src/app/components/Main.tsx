@@ -15,8 +15,8 @@ export default function Main() {
     const color = theme.color;
 
     return(
-        <main className={`flex justify-center ${color}-background`}>
-            <div className={`flex h-screen max-w-sm flex-col items-center justify-between p-5 ${color}-background`}>
+        <main className={`flex justify-center ${color}-background h-full items-center`}>
+            <div className={`flex h-screen max-w-sm flex-col items-center justify-between p-5 ${color}-background max-h-hd`}>
                 <Timer></Timer>
             </div>
         </main>

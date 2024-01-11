@@ -8,7 +8,7 @@ import './Timer.scss'
 import {useState, useEffect, useContext} from 'react';
 import ThemeContext from '../context/ThemeContext';
 import Image from 'next/image'
-import { Next, Pause, Play, Stop } from './svgs';
+import { Config, Next, Pause, Play, Stop } from './svgs';
 import Pomodoros from './Pomodoros';
 
 declare module 'react' {
@@ -128,12 +128,14 @@ export default function Timer() {
       <section className='flex flex-col w-full justify-around gap-10'>
         <div className='flex w-full justify-between'>
           <h1>Easy pomodoro</h1>
-          <Image
-            src={require("../../../public/config.png")}
+          <Config className="config" />
+{/*           <Image
+            className='config'
+            src={require("../../../public/config.svg")}
             width={36}
             height={36}
             alt="Configuration"
-          />
+          /> */}
         </div>
         <Pomodoros currentPomodoro={currentPomodoro} color={color}/>
       </section>

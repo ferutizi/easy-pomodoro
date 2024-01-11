@@ -22,6 +22,9 @@ const config: Config = {
       },
       height: {
         '60': '3.75rem'
+      },
+      spacing: {
+        'hd': '1080px',
       }
     },
   },

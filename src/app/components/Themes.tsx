@@ -18,7 +18,7 @@ export default function Themes() {
     return(
         <div className='flex flex-col items-center'>
           <Image
-            className={`arrow--${showThemes ? 'down' : 'up'}`}
+            className={`arrow arrow--${showThemes ? 'down' : 'up'}`}
             src={require("../../../public/arrow.png")}
             width={34}
             height={8}
