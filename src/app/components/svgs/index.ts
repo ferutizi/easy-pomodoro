@@ -1,3 +1,4 @@
+export {default as Arrow} from './arrow.svg'
 export {default as Config} from './config.svg'
 export {default as Next} from './next2.svg'
 export {default as Pause} from './pause2.svg'

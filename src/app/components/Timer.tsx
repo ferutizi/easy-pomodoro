@@ -10,6 +10,7 @@ import ThemeContext from '../context/ThemeContext';
 import { Config, Next, Pause, Play, Stop } from './svgs';
 import Pomodoros from './Pomodoros';
 import Clock from './Clock';
+import { salsa } from '../Fonts';
 
 declare module 'react' {
   interface CSSProperties {
@@ -127,7 +128,7 @@ export default function Timer() {
     <>
       <section className='flex flex-col w-full justify-around gap-10'>
         <div className='flex w-full justify-between'>
-          <h1>Easy pomodoro</h1>
+          <h1 className={`${salsa.className} antialiased text-2xl text-white`} >Easy pomodoro</h1>
           <button aria-label='Configuration'>
             <Config className="config" />
           </button>

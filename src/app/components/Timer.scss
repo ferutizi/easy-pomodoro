@@ -63,23 +63,6 @@
     }
 }
 
-.arrow {
-    height: 8px;
-    width: 34px;
-    margin: 0.5rem 0;
-    cursor: pointer;
-}
-
-.arrow-- {
-    &up {
-        filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.25));
-    }
-    &down {
-        transform: rotate(180deg);
-        filter: drop-shadow(0 -2px 0 rgba(0, 0, 0, 0.25));
-    }
-}
-
 .config {
     width: 36px;
     height: 36px;

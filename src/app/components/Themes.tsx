@@ -1,14 +1,14 @@
 'use client'
 
+import './Theme.scss'
 import { useState, useContext } from "react";
-import Image from "next/image";
 import ThemeContext from "../context/ThemeContext";
+import { Arrow } from "./svgs";
 
 export default function Themes() {
     const [showThemes, setShowThemes] = useState<boolean>(true);
 
     const themeContext = useContext(ThemeContext);
-
     if (!themeContext) {
       return null;
     }
@@ -17,14 +17,9 @@ export default function Themes() {
 
     return(
         <div className='flex flex-col items-center'>
-          <Image
-            className={`arrow arrow--${showThemes ? 'down' : 'up'}`}
-            src={require("../../../public/arrow.png")}
-            width={34}
-            height={8}
-            alt={`${showThemes ? 'Hide color themes' : 'Show color themes'}`}
-            onClick={() => setShowThemes(!showThemes)}
-          />
+          <button aria-label={`${showThemes ? 'Hide color themes' : 'Show color themes'}`} onClick={() => setShowThemes(!showThemes)}>
+            <Arrow className={`arrow arrow--${showThemes ? 'down' : 'up'}`} />
+          </button>
           {
             showThemes ?
             <div className='flex justify-between w-full'>
