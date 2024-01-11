@@ -1,58 +1,6 @@
 @import '../sass/variables';
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
-@keyframes progress {
-    to {
-        stroke-dasharray: 100 100;
-    }
-}
-
-.progress__circle {
-    stroke-width: 8px;
-    stroke-dasharray: 0 100;
-    transform: rotate(-90deg);
-    transform-origin: 50%;
-    animation: progress linear forwards;
-/*     animation-timing-function: steps(var(--steps), end); */
-    animation-duration: var(--totalTime);
-    animation-play-state: var(--pause);
-}
-
-.base__circle {
-    stroke-width: 8px;
-    stroke-dasharray: 100 100;
-    transform: rotate(-90deg);
-    transform-origin: 50%;
-    filter: drop-shadow(-5px 0px 0.7px rgba(0, 0, 0, 0.25));
-}
-
-/* ---------------------------------------------------- */
-
-.timer--clock {
-    color: #fff;
-    text-shadow: $shadow;
-    font-weight: 400;
-    letter-spacing: 0;
-    position: relative;
-    z-index: 1;
-}
-
-.timer--minutes {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 7.375em;
-}
-
-.timer--seconds {
-    position: absolute;
-    top: 78px;
-    right: 50px;
-    font-size: 30px;
-    text-shadow: 0px 2px 0.7px rgba(0, 0, 0, 0.25);
-}
-
 .button--start, .button--pause, .button--reset, .button--next {
     width: 60px;
     height: 60px;

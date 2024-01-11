@@ -9,8 +9,9 @@ import {useState, useEffect, useContext} from 'react';
 import ThemeContext from '../context/ThemeContext';
 import { Config, Next, Pause, Play, Stop } from './svgs';
 import Pomodoros from './Pomodoros';
-import Clock from './Clock';
+import './Clock'
 import { salsa } from '../Fonts';
+import Clock from './Clock';
 
 declare module 'react' {
   interface CSSProperties {

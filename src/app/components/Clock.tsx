@@ -1,4 +1,5 @@
-import { Theme } from "../context/ThemeContext"
+import './Clock.scss';
+import { Theme } from "../context/ThemeContext";
 
 interface ClockProps {
     color: Theme,
