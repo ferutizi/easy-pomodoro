@@ -7,9 +7,9 @@ import './colors.scss';
 import './Timer.scss'
 import {useState, useEffect, useContext} from 'react';
 import ThemeContext from '../context/ThemeContext';
-import Image from 'next/image'
 import { Config, Next, Pause, Play, Stop } from './svgs';
 import Pomodoros from './Pomodoros';
+import Clock from './Clock';
 
 declare module 'react' {
   interface CSSProperties {
@@ -128,49 +128,46 @@ export default function Timer() {
       <section className='flex flex-col w-full justify-around gap-10'>
         <div className='flex w-full justify-between'>
           <h1>Easy pomodoro</h1>
-          <Config className="config" />
-{/*           <Image
-            className='config'
-            src={require("../../../public/config.svg")}
-            width={36}
-            height={36}
-            alt="Configuration"
-          /> */}
+          <button aria-label='Configuration'>
+            <Config className="config" />
+          </button>
         </div>
         <Pomodoros currentPomodoro={currentPomodoro} color={color}/>
       </section>
-      <section className='timer--clock'>
-        <svg width="300" height="300">
-          <circle className={`base__circle ${color}-secondary`} r="130" cx="50%" cy="50%" pathLength="100" />
-          { circleProgress ?
-            <circle style={{"--totalTime": `${totalTime}s`, /* "--steps": `${totalTime}`, */ "--pause": `${animationPause ? 'running' : 'paused'}`}} className={`progress__circle ${color}-secondary ${color}-primary`} r="130" cx="50%" cy="50%" pathLength="100" />
-            : null
-          }
-        </svg>
-        <div className='timer--minutes'>
-          <p>
-            {minutes.toString().padStart(2, '0')}
-          </p>
-        </div>
-        <div className='timer--seconds'>
-          <p>
-            {seconds.toString().padStart(2, '0')}
-          </p>
-        </div>
-      </section>
+      <Clock 
+        color={color}
+        circleProgress={circleProgress}
+        totalTime={totalTime}
+        animationPause={animationPause}
+        minutes={minutes}
+        seconds={seconds}
+      /> 
       <section className='flex flex-col w-full gap-4 '>
         <div className='flex gap-10 justify-center'>
-        <Stop className={`icon icon--${color}`} onClick={()=> reset()} />
+          <button type='button' aria-label='stop' onClick={()=> reset()}>
+            <Stop className={`icon icon--${color}`} />
+          </button>
           <div>
             {!startButton 
-              ? (!isRunning 
-                  ? <Play className={`icon icon--${color}`} onClick={()=> pause()} />
-                  : <Pause className={`icon icon--${color}`} onClick={()=> pause()} />
+              ? (!isRunning ?
+                  <button aria-label='play' onClick={()=> pause()}>
+                    <Play className={`icon icon--${color}`} />
+                  </button>
+                :
+                  <button aria-label='pause' onClick={()=> pause()}>
+                    <Pause className={`icon icon--${color}`} />
+                  </button>
+
                 ) 
-              : <Play className={`icon icon--${color}`} onClick={()=> start()} />
+              : 
+              <button aria-label='start' onClick={()=> start()}>
+                <Play className={`icon icon--${color}`} />
+              </button>
             }
           </div>
-          <Next className={`icon icon--${color}`} onClick={()=> next()} />
+          <button aria-label='next' onClick={()=> next()}>
+            <Next className={`icon icon--${color}`} />
+          </button>
         </div>
         <Themes />
       </section>

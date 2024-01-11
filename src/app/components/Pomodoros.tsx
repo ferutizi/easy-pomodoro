@@ -5,8 +5,8 @@ import './Timer.scss';
 import { Theme } from '../context/ThemeContext';
 
 interface PomodorosProps {
-    currentPomodoro: number;
-    color: Theme;
+  currentPomodoro: number;
+  color: Theme;
 }
 
 export default function Pomodoros({currentPomodoro, color}: PomodorosProps) {
