@@ -17,7 +17,7 @@ export default function Main() {
     return(
         <main className={`flex justify-center ${color}-background h-full items-center`}>
             <div className={`flex h-screen max-w-sm flex-col items-center justify-between p-5 ${color}-background max-h-hd`}>
-                <Timer></Timer>
+                <Timer />
             </div>
         </main>
     );

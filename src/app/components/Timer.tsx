@@ -10,7 +10,7 @@ import ThemeContext from '../context/ThemeContext';
 import { Config, Next, Pause, Play, Stop } from './svgs';
 import Pomodoros from './Pomodoros';
 import './Clock'
-import { salsa } from '../Fonts';
+import { salsa } from '../fonts';
 import Clock from './Clock';
 
 declare module 'react' {
@@ -21,9 +21,9 @@ declare module 'react' {
 
 export default function Timer() {
   //Initial interval times
-  const [pomodoroMinutes, setPomodoroMinutes] = useState<number>(25);
+  const [pomodoroMinutes, setPomodoroMinutes] = useState<number>(1);
   const [pomodoroSeconds, setPomodoroSeconds] = useState<number>(0);
-  const [breakMinutes, setBreakMinutes] = useState<number>(5);
+  const [breakMinutes, setBreakMinutes] = useState<number>(2);
   const [breakSeconds, setBreakSeconds] = useState<number>(0);
   const [longBreakMinutes, setLongBreakMinutes] = useState<number>(15);
   const [longBreakSeconds, setLongBreakSeconds] = useState<number>(0);
@@ -50,32 +50,32 @@ export default function Timer() {
   },[circleProgress]);
 
   useEffect(() => {
-      if(isRunning) {
-          const countDown = setInterval(() => {
-            if (seconds === 0) {
-              if (minutes === 0) {
-                setIsRunning(false);
-                setCircleProgress(false);
-                clearInterval(countDown);
-                return;
-              }
-              setSeconds(59);
-              setMinutes(minutes - 1);
-            } else {
-              setSeconds(seconds - 1);
-            }
-          }, 1000);
-          return () => {
+    if(isRunning) {
+      const countDown = setInterval(() => {
+        if (seconds === 0) {
+          if (minutes === 0) {
+            setIsRunning(false);
+            setCircleProgress(false);
             clearInterval(countDown);
-          };
-      }
+            return;
+          }
+          setSeconds(59);
+          setMinutes(minutes - 1);
+        } else {
+          setSeconds(seconds - 1);
+        }
+      }, 1000);
+      return () => {
+        clearInterval(countDown);
+      };
+    }
   }, [minutes, seconds, isRunning, currentPomodoro]);
 
   const start = () => {
-      setStartButton(false)
-      setAnimationPause(true)
-      setIsRunning(true);
-      setCircleProgress(true);
+    setStartButton(false)
+    setAnimationPause(true)
+    setIsRunning(true);
+    setCircleProgress(true);
   }
   
   const reset = () => {
@@ -134,6 +134,8 @@ export default function Timer() {
             <Config className="config" />
           </button>
         </div>
+      </section>
+      <section>
         <Pomodoros currentPomodoro={currentPomodoro} color={color}/>
       </section>
       <Clock 
@@ -144,7 +146,7 @@ export default function Timer() {
         minutes={minutes}
         seconds={seconds}
       /> 
-      <section className='flex flex-col w-full gap-4 '>
+      <section className='flex flex-col w-full gap-4'>
         <div className='flex gap-10 justify-center'>
           <button type='button' aria-label='stop' onClick={()=> reset()}>
             <Stop className={`icon icon--${color}`} />
@@ -159,7 +161,6 @@ export default function Timer() {
                   <button aria-label='pause' onClick={()=> pause()}>
                     <Pause className={`icon icon--${color}`} />
                   </button>
-
                 ) 
               : 
               <button aria-label='start' onClick={()=> start()}>
@@ -171,6 +172,8 @@ export default function Timer() {
             <Next className={`icon icon--${color}`} />
           </button>
         </div>
+      </section>
+      <section className='flex flex-col w-full gap-4'>
         <Themes />
       </section>
     </>

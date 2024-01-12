@@ -16,7 +16,14 @@ export default function Clock({color, circleProgress, totalTime, animationPause,
             <svg width="300" height="300">
             <circle className={`base__circle ${color}-secondary`} r="130" cx="50%" cy="50%" pathLength="100" />
             { circleProgress ?
-                <circle style={{"--totalTime": `${totalTime}s`, /* "--steps": `${totalTime}`, */ "--pause": `${animationPause ? 'running' : 'paused'}`}} className={`progress__circle ${color}-secondary ${color}-primary`} r="130" cx="50%" cy="50%" pathLength="100" />
+                <circle 
+                    style={{"--totalTime": `${totalTime}s`, /* "--steps": `${totalTime}`, */ "--pause": `${animationPause ? 'running' : 'paused'}`}} 
+                    className={`progress__circle ${color}-secondary ${color}-primary`} 
+                    r="130" 
+                    cx="50%" 
+                    cy="50%" 
+                    pathLength="100"
+                />
                 : null
             }
             </svg>
