@@ -7,10 +7,9 @@ import './colors.scss';
 import './Timer.scss'
 import {useState, useEffect, useContext} from 'react';
 import ThemeContext from '../context/ThemeContext';
-import { Config, Next, Pause, Play, Stop } from './svgs';
+import { Next, Pause, Play, Stop } from './svgs';
 import Pomodoros from './Pomodoros';
 import './Clock'
-import { salsa } from '../fonts';
 import Clock from './Clock';
 
 declare module 'react' {
@@ -19,19 +18,26 @@ declare module 'react' {
   }
 }
 
-export default function Timer() {
+interface TimerProps {
+  pomodoroMinutes: number;
+  breakMinutes: number;
+  longBreakMinutes: number;
+}
+
+export default function Timer({pomodoroMinutes, breakMinutes, longBreakMinutes}: TimerProps) {
   //Initial interval times
-  const [pomodoroMinutes, setPomodoroMinutes] = useState<number>(1);
+/*   const [pomodoroMinutes, setPomodoroMinutes] = useState<number>(1);
   const [pomodoroSeconds, setPomodoroSeconds] = useState<number>(0);
   const [breakMinutes, setBreakMinutes] = useState<number>(2);
   const [breakSeconds, setBreakSeconds] = useState<number>(0);
   const [longBreakMinutes, setLongBreakMinutes] = useState<number>(15);
-  const [longBreakSeconds, setLongBreakSeconds] = useState<number>(0);
+  const [longBreakSeconds, setLongBreakSeconds] = useState<number>(0); */
   //State pomodoro or break
   const [intervalState, setIntervalState] = useState<boolean>(true);
   //Set initial time
   const [minutes, setMinutes] = useState<number>(pomodoroMinutes);
-  const [seconds, setSeconds] = useState<number>(pomodoroSeconds);
+/*   const [pomodoroSeconds, setPomodoroSeconds] = useState<number>(0); */
+  const [seconds, setSeconds] = useState<number>(0);
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [circleProgress, setCircleProgress] = useState<boolean>(false);
   const [animationPause, setAnimationPause] = useState<boolean>(true);
@@ -42,7 +48,11 @@ export default function Timer() {
   
   const { theme } = useContext(ThemeContext);
   const color = theme.color;
-  
+
+  useEffect(() => {
+    setMinutes(pomodoroMinutes);
+  }, [pomodoroMinutes]);
+
   useEffect(() => {
     if(circleProgress) {
       setTotalTime(minutes * 60 + seconds);
@@ -84,7 +94,7 @@ export default function Timer() {
       setIsRunning(false);
       setCircleProgress(false);
       setMinutes(pomodoroMinutes);
-      setSeconds(pomodoroSeconds);
+/*       setSeconds(pomodoroSeconds); */
       setCurrentPomodoro(1);
     }
   }
@@ -106,18 +116,19 @@ export default function Timer() {
       setStartButton(true)
       setIsRunning(false);
       setCircleProgress(false);
+      setSeconds(0);
       if(!intervalState) {
         setCurrentPomodoro(currentPomodoro + 1);
         setMinutes(pomodoroMinutes);
-        setSeconds(pomodoroSeconds);
+/*         setSeconds(pomodoroSeconds); */
       } else {
         if(currentPomodoro === 4) {
           setMinutes(longBreakMinutes);
-          setSeconds(longBreakSeconds);
+/*           setSeconds(longBreakSeconds); */
           setCurrentPomodoro(0);
         } else {          
           setMinutes(breakMinutes);
-          setSeconds(breakSeconds);
+/*           setSeconds(breakSeconds); */
         }
       }
       setIntervalState(!intervalState);
@@ -127,17 +138,7 @@ export default function Timer() {
 
   return (
     <>
-      <section className='flex flex-col w-full justify-around gap-10'>
-        <div className='flex w-full justify-between'>
-          <h1 className={`${salsa.className} antialiased text-2xl text-white`} >Easy pomodoro</h1>
-          <button aria-label='Configuration'>
-            <Config className="config" />
-          </button>
-        </div>
-      </section>
-      <section>
-        <Pomodoros currentPomodoro={currentPomodoro} color={color}/>
-      </section>
+      <Pomodoros currentPomodoro={currentPomodoro} color={color}/>
       <Clock 
         color={color}
         circleProgress={circleProgress}
