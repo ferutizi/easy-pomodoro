@@ -106,7 +106,7 @@ export default function Timer({pomodoroMinutes, breakMinutes, longBreakMinutes}:
       setIsRunning(false);
       setCircleProgress(false);
       setMinutes(pomodoroMinutes);
-/*       setSeconds(pomodoroSeconds); */
+      setSeconds(0);
       setCurrentPomodoro(1);
     }
   }
