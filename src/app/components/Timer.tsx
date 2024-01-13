@@ -49,7 +49,7 @@ export default function Timer({pomodoroMinutes, breakMinutes, longBreakMinutes}:
   const { theme } = useContext(ThemeContext);
   const color = theme.color;
 
-  //Configuration Time from Main.tsx
+  //Setting Time from Main.tsx
   useEffect(() => {
     setMinutes(pomodoroMinutes);
   }, [pomodoroMinutes]);
