@@ -32,7 +32,7 @@ export default function Timer({pomodoroMinutes, breakMinutes, longBreakMinutes}:
   const [breakSeconds, setBreakSeconds] = useState<number>(0);
   const [longBreakMinutes, setLongBreakMinutes] = useState<number>(15);
   const [longBreakSeconds, setLongBreakSeconds] = useState<number>(0); */
-  //State pomodoro or break
+  //State pomodoro(true) or break(false)
   const [intervalState, setIntervalState] = useState<boolean>(true);
   //Set initial time
   const [minutes, setMinutes] = useState<number>(pomodoroMinutes);
@@ -49,9 +49,21 @@ export default function Timer({pomodoroMinutes, breakMinutes, longBreakMinutes}:
   const { theme } = useContext(ThemeContext);
   const color = theme.color;
 
+  //Configuration Time from Main.tsx
   useEffect(() => {
     setMinutes(pomodoroMinutes);
   }, [pomodoroMinutes]);
+
+  useEffect(() => {
+    if(!intervalState)
+    setMinutes(breakMinutes);
+  }, [breakMinutes]);
+
+  useEffect(() => {
+    if(!intervalState && currentPomodoro === 0)
+    setMinutes(longBreakMinutes);
+  }, [longBreakMinutes]);
+  //-------------------------
 
   useEffect(() => {
     if(circleProgress) {

@@ -55,12 +55,25 @@ export default function Main() {
                 </div>
             </section>
             {modal && 
-                <form onSubmit={handleSubmit}>
-                    <input name="pomodoro" type="number" value={timerValue.pomodoro} onChange={handleChange} />
-                    <input name="break" type="number" value={timerValue.break} onChange={handleChange} />
-                    <input name="longBreak" type="number" value={timerValue.longBreak} onChange={handleChange} />
-                    <button type="submit">ok</button>
-                </form>
+                <div className="flex flex-col">
+                    <h2 className="text-white">Timer</h2>
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                        <div className="flex flex-col gap-8">
+                            <div className="flex bg-gray-800 h-12 px-2 rounded">
+                                <label className="flex items-center justify-between text-lg w-64 text-white"> Pomodoros
+                                    <input className="w-20 h-10 text-3xl text-black rounded text-center" name="pomodoro" type="number" value={timerValue.pomodoro} onChange={handleChange} />
+                                </label>
+                            </div>
+                            <label className="flex items-center justify-between text-lg text-white"> Breaks
+                                <input className="w-20 h-12 text-3xl text-black" name="break" type="number" value={timerValue.break} onChange={handleChange} />
+                            </label>
+                            <label className="flex items-center justify-between text-lg text-white"> Long breaks
+                                <input className="w-20 h-12 text-3xl text-black" name="longBreak" type="number" value={timerValue.longBreak} onChange={handleChange} />
+                            </label>
+                        </div>
+                        <button type="submit">ok</button>
+                    </form>
+                </div>
             }
             <Timer pomodoroMinutes={pomodoroMinutes} breakMinutes={breakMinutes} longBreakMinutes={longBreakMinutes} />
             </div>
