@@ -25,25 +25,17 @@ interface TimerProps {
 }
 
 export default function Timer({pomodoroMinutes, breakMinutes, longBreakMinutes}: TimerProps) {
-  //Initial interval times
-/*   const [pomodoroMinutes, setPomodoroMinutes] = useState<number>(1);
-  const [pomodoroSeconds, setPomodoroSeconds] = useState<number>(0);
-  const [breakMinutes, setBreakMinutes] = useState<number>(2);
-  const [breakSeconds, setBreakSeconds] = useState<number>(0);
-  const [longBreakMinutes, setLongBreakMinutes] = useState<number>(15);
-  const [longBreakSeconds, setLongBreakSeconds] = useState<number>(0); */
   //State pomodoro(true) or break(false)
   const [intervalState, setIntervalState] = useState<boolean>(true);
   //Set initial time
   const [minutes, setMinutes] = useState<number>(pomodoroMinutes);
-/*   const [pomodoroSeconds, setPomodoroSeconds] = useState<number>(0); */
   const [seconds, setSeconds] = useState<number>(0);
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [circleProgress, setCircleProgress] = useState<boolean>(false);
   const [animationPause, setAnimationPause] = useState<boolean>(true);
-  const [totalTime, setTotalTime] = useState<number>();
+  const [totalTime, setTotalTime] = useState<number>(0);
   const [currentPomodoro, setCurrentPomodoro] = useState<number>(1);
-
+  //Show startButton(true) or playButton(false)
   const [startButton, setStartButton] = useState<boolean>(true);
   
   const { theme } = useContext(ThemeContext);
@@ -117,7 +109,7 @@ export default function Timer({pomodoroMinutes, breakMinutes, longBreakMinutes}:
       /* It is necessary to keep the timer and animation in sync */
       setTimeout(()=> {
         setAnimationPause(!animationPause);
-      }, 500)
+      }, 750)
     } else {
       setAnimationPause(!animationPause)
     }
@@ -132,20 +124,17 @@ export default function Timer({pomodoroMinutes, breakMinutes, longBreakMinutes}:
       if(!intervalState) {
         setCurrentPomodoro(currentPomodoro + 1);
         setMinutes(pomodoroMinutes);
-/*         setSeconds(pomodoroSeconds); */
       } else {
         if(currentPomodoro === 4) {
           setMinutes(longBreakMinutes);
-/*           setSeconds(longBreakSeconds); */
           setCurrentPomodoro(0);
         } else {          
           setMinutes(breakMinutes);
-/*           setSeconds(breakSeconds); */
         }
       }
       setIntervalState(!intervalState);
     }
-    //inicio descanso
+    //Start Break
   }
 
   return (

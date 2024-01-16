@@ -49,7 +49,7 @@ export default function Main() {
       <section className='flex flex-col w-full justify-around gap-10'>
         <div className='flex w-full justify-between'>
           <h1 className={`${salsa.className} antialiased text-2xl text-white`} >Easy pomodoro</h1>
-          <button aria-label='Settings' onClick={() => setModal(true)}>
+          <button id="settings" aria-label='Settings' onClick={() => setModal(true)}>
             <Config className="config" />
           </button>
         </div>
@@ -91,7 +91,7 @@ export default function Main() {
               <hr style={{borderColor: "white"}}></hr>
             </div>
           </div> {/* Footer */}
-          <button className={`p-2 rounded-lg ${color}-light font-bold text-black hover:bg-white transition-all ease-out 2seg duration-700`} type="submit">Save changes</button>
+          <button className={`p-2 rounded-lg ${color}-light font-bold text-black shadow-custom active:shadow-active hover:bg-white transition-all ease-out 2seg duration-700`} type="submit">Save changes</button>
         </form>
       }
       <Timer pomodoroMinutes={pomodoroMinutes} breakMinutes={breakMinutes} longBreakMinutes={longBreakMinutes} />
