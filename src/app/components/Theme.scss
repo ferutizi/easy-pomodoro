@@ -1,5 +1,37 @@
 @import '../sass/variables';
 
+@keyframes arrowDown {
+    from {
+        top: 0px;
+    }
+    to {
+        top: 6px;
+    }
+}
+
+@keyframes arrowUp {
+    from {
+        top: 0px;
+    }
+    to {
+        top: -6px;
+    }
+}
+
+.arrow__container--down {
+    position: relative;
+    &:hover {
+        animation: arrowDown 700ms forwards;
+    }
+}
+
+.arrow__container--up {
+    position: relative;
+    &:hover {
+        animation: arrowUp 700ms forwards;
+    }
+}
+
 .arrow {
     height: 8px;
     width: 34px;
