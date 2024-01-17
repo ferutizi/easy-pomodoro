@@ -2,6 +2,9 @@
 
 import { ChangeEvent, useContext, useState } from "react";
 import ThemeContext from '../context/ThemeContext';
+//@ts-ignore
+import useSound from 'use-sound';
+import alarm from "../../../public/sounds/alarm.wav";
 import Timer from "./Timer";
 import { Config } from '../components/svgs';
 import { salsa } from '../fonts';
@@ -17,12 +20,13 @@ export default function Main() {
   const [breakMinutes, setBreakMinutes] = useState<number>(5);
   const [longBreakMinutes, setLongBreakMinutes] = useState<number>(15);
   const [modal, setModal] = useState<boolean>(false);
-
+  const [playSound] = useSound(alarm);
+  
   const themeContext = useContext(ThemeContext);
   if (!themeContext) {
     return null;
   }
-
+  
   const { theme } = themeContext;
   const color = theme.color;
   
@@ -32,7 +36,7 @@ export default function Main() {
       [e.target.name]: e.target.value
     })
   }
-
+  
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if(timerValue.pomodoro > 0) {
@@ -42,7 +46,7 @@ export default function Main() {
     }
     setModal(false);
   }
-
+  
   return(
     <main className={`flex justify-center ${color}-background h-full items-center`}>
       <div className={`flex h-screen max-w-sm flex-col items-center justify-between p-5 ${color}-background max-h-hd`}>
@@ -53,6 +57,7 @@ export default function Main() {
             <Config className="config" />
           </button>
         </div>
+        <button onClick={playSound}>Alarm</button>
       </section>
       {modal && 
         <div className="w-screen h-screen fixed z-20 bg-transparent">

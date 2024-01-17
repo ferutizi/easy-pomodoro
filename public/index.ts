@@ -1,0 +1,1 @@
+export {default as alarm} from './alarm.wav';
