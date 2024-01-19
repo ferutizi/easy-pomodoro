@@ -1,13 +1,15 @@
 'use client'
 
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import ThemeContext from '../context/ThemeContext';
+import Timer from "./Timer";
 //@ts-ignore
 import useSound from 'use-sound';
-import alarm from "../../../public/sounds/alarm.wav";
-import Timer from "./Timer";
+import { alarm, alarmDouble, bells, complete, longBells, note } from "../../../public/sounds";
 import { Config } from '../components/svgs';
 import { salsa } from '../fonts';
+
+export type SoundType = "alarm" | "alarmDouble" | "bells" | "longBells" | "complete" | "note";
 
 export default function Main() {
   const initialTimer = {
@@ -20,7 +22,24 @@ export default function Main() {
   const [breakMinutes, setBreakMinutes] = useState<number>(5);
   const [longBreakMinutes, setLongBreakMinutes] = useState<number>(15);
   const [modal, setModal] = useState<boolean>(false);
-  const [playSound] = useSound(alarm);
+  const [alarmSound, setAlarmSound] = useState<string>('note')
+
+  const [playAlarm] = useSound(alarm);
+  const [playAlarmDouble] = useSound(alarmDouble);
+  const [playBells] = useSound(bells);
+  const [playLongBells] = useSound(longBells);
+  const [playComplete] = useSound(complete);
+  const [playNote] = useSound(note);
+
+  const playSound = (alarmSound: any) => {
+    console.log(alarmSound)
+    if(alarmSound === 'alarm') return playAlarm();
+    if(alarmSound === 'alarmDouble') return playAlarmDouble();
+    if(alarmSound === 'bells') return playBells();
+    if(alarmSound === 'longBells') return playLongBells();
+    if(alarmSound === 'complete') return playComplete();
+    if(alarmSound === 'note') return playNote();
+  }
   
   const themeContext = useContext(ThemeContext);
   if (!themeContext) {
@@ -31,10 +50,15 @@ export default function Main() {
   const color = theme.color;
   
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setTimerValue({
       ...timerValue,
-      [e.target.name]: e.target.value
+      [name]: value
     })
+    if(name === "alarmSound") {
+      setAlarmSound(value as SoundType)
+      console.log(alarmSound)
+    }
   }
   
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -57,7 +81,6 @@ export default function Main() {
             <Config className="config" />
           </button>
         </div>
-        <button onClick={playSound}>Alarm</button>
       </section>
       {modal && 
         <div className="w-screen h-screen fixed z-20 bg-transparent">
@@ -69,7 +92,7 @@ export default function Main() {
               <h2 className="text-white text-lg">Settings</h2>
             </div>
             <div className="flex flex-col gap-6"> {/* Options */}
-              <div className= "flex flex-col gap-4">
+              <article className= "flex flex-col gap-4">
                 <div>
                   <h2 className="text-white text-center text-xl pl-0">Timer</h2>
                   <hr style={{borderColor: "white"}}></hr>
@@ -91,17 +114,46 @@ export default function Main() {
                     </label>
                   </div>
                 </div>
-              </div>
-              <div> 
-                <h2 className="text-white text-center text-xl pl-0">Sounds</h2>
-                <hr style={{borderColor: "white"}}></hr>
-              </div>
+              </article>
+              <article> 
+                <div>
+                  <h2 className="text-white text-center text-xl pl-0">Sounds</h2>
+                  <hr style={{borderColor: "white"}}></hr>
+                </div>
+                <div>
+                  <div>
+                    Alarm sound yes/no
+                  </div>
+                  <div>
+                    <select onChange={(e) => setAlarmSound(e.target.value)} defaultValue={'note'}>
+                      <option value='alarm'>Alarm</option>
+                      <option value='alarmDouble'>Alarm Double</option>
+                      <option value='bells'>Bells</option>
+                      <option value='longBells'>Long Bells</option>
+                      <option value='complete'>Complete</option>
+                      <option value='note'>note</option>
+                    </select>
+                    <button type="button" onClick={() => playSound(alarmSound)}>Play</button>
+                  </div>
+                </div>
+              </article>
             </div> {/* Footer */}
             <button className={`p-2 rounded-lg ${color}-light font-bold text-black shadow-custom active:shadow-active hover:bg-white transition-all ease-out 2seg duration-700`} type="submit">Save changes</button>
           </form>
         </div>
       }
-      <Timer pomodoroMinutes={pomodoroMinutes} breakMinutes={breakMinutes} longBreakMinutes={longBreakMinutes} />
+      <Timer
+        pomodoroMinutes={pomodoroMinutes}
+        breakMinutes={breakMinutes}
+        longBreakMinutes={longBreakMinutes}
+        alarmSound={alarmSound}
+        playAlarm={playAlarm}
+        playAlarmDouble={playAlarmDouble}
+        playBells={playBells}
+        playLongBells={playLongBells}
+        playComplete={playComplete}
+        playNote={playNote}
+      />
       </div>
     </main>
   );
