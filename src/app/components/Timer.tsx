@@ -8,10 +8,8 @@ import './Timer.scss'
 import {useState, useEffect, useContext} from 'react';
 import ThemeContext from '../context/ThemeContext';
 import { Next, Pause, Play, Stop } from './svgs';
-//@ts-ignore
-import useSound from 'use-sound';
-import { alarm, alarmDouble, bells, complete, longBells, note } from "../../../public/sounds";
-import { SoundType, any } from './Main';
+import { useAlarm } from '../hooks/useAlarm';
+import { SoundType } from './Main';
 import Pomodoros from './Pomodoros';
 import './Clock'
 import Clock from './Clock';
@@ -27,15 +25,9 @@ interface TimerProps {
   breakMinutes: number;
   longBreakMinutes: number;
   alarmSound: SoundType;
-  playAlarm: any;
-  playAlarmDouble: any;
-  playBells: any;
-  playLongBells: any;
-  playComplete: any;
-  playNote: any;
 }
 
-export default function Timer({pomodoroMinutes, breakMinutes, longBreakMinutes, alarmSound, playAlarm, playAlarmDouble, playBells, playLongBells, playComplete, playNote}: TimerProps) {
+export default function Timer({pomodoroMinutes, breakMinutes, longBreakMinutes, alarmSound}: TimerProps) {
   //State pomodoro(true) or break(false)
   const [intervalState, setIntervalState] = useState<boolean>(true);
   //Set initial time
@@ -48,19 +40,11 @@ export default function Timer({pomodoroMinutes, breakMinutes, longBreakMinutes, 
   const [currentPomodoro, setCurrentPomodoro] = useState<number>(1);
   //Show startButton(true) or playButton(false)
   const [startButton, setStartButton] = useState<boolean>(true);
+
+  const [playSound] = useAlarm();
   
   const { theme } = useContext(ThemeContext);
   const color = theme.color;
-
-  const playSound = (alarmSound: any) => {
-    console.log(alarmSound)
-    if(alarmSound === 'alarm') return playAlarm();
-    if(alarmSound === 'alarmDouble') return playAlarmDouble();
-    if(alarmSound === 'bells') return playBells();
-    if(alarmSound === 'longBells') return playLongBells();
-    if(alarmSound === 'complete') return playComplete();
-    if(alarmSound === 'note') return playNote();
-  }
 
   //Setting Time from Main.tsx
   useEffect(() => {

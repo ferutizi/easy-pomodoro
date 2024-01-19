@@ -1,11 +1,9 @@
 'use client'
 
-import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import ThemeContext from '../context/ThemeContext';
 import Timer from "./Timer";
-//@ts-ignore
-import useSound from 'use-sound';
-import { alarm, alarmDouble, bells, complete, longBells, note } from "../../../public/sounds";
+import { useAlarm } from "../hooks/useAlarm";
 import { Config } from '../components/svgs';
 import { salsa } from '../fonts';
 
@@ -24,22 +22,7 @@ export default function Main() {
   const [modal, setModal] = useState<boolean>(false);
   const [alarmSound, setAlarmSound] = useState<string>('note')
 
-  const [playAlarm] = useSound(alarm);
-  const [playAlarmDouble] = useSound(alarmDouble);
-  const [playBells] = useSound(bells);
-  const [playLongBells] = useSound(longBells);
-  const [playComplete] = useSound(complete);
-  const [playNote] = useSound(note);
-
-  const playSound = (alarmSound: any) => {
-    console.log(alarmSound)
-    if(alarmSound === 'alarm') return playAlarm();
-    if(alarmSound === 'alarmDouble') return playAlarmDouble();
-    if(alarmSound === 'bells') return playBells();
-    if(alarmSound === 'longBells') return playLongBells();
-    if(alarmSound === 'complete') return playComplete();
-    if(alarmSound === 'note') return playNote();
-  }
+  const [playSound] = useAlarm();
   
   const themeContext = useContext(ThemeContext);
   if (!themeContext) {
@@ -147,12 +130,6 @@ export default function Main() {
         breakMinutes={breakMinutes}
         longBreakMinutes={longBreakMinutes}
         alarmSound={alarmSound}
-        playAlarm={playAlarm}
-        playAlarmDouble={playAlarmDouble}
-        playBells={playBells}
-        playLongBells={playLongBells}
-        playComplete={playComplete}
-        playNote={playNote}
       />
       </div>
     </main>
