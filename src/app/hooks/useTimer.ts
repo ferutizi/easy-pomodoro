@@ -118,5 +118,5 @@ export function useTimer({pomodoroMinutes, breakMinutes, longBreakMinutes, alarm
     //Start Break
   }
 
-  return [start, reset, pause, next, startButton, isRunning, circleProgress, totalTime, animationPause, minutes, seconds, currentPomodoro];
+  return [start, reset, pause, next, startButton, isRunning, circleProgress, totalTime, animationPause, minutes, seconds, currentPomodoro] as const;
 }

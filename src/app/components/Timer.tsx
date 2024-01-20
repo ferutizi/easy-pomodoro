@@ -36,38 +36,38 @@ export default function Timer({pomodoroMinutes, breakMinutes, longBreakMinutes, 
 
   return (
     <>
-      <Pomodoros currentPomodoro={currentPomodoro as number} color={color}/>
+      <Pomodoros currentPomodoro={currentPomodoro} color={color}/>
       <Clock 
         color={color}
-        circleProgress={circleProgress as boolean}
-        totalTime={totalTime as number}
-        animationPause={animationPause as boolean}
-        minutes={minutes as number}
-        seconds={seconds as number}
+        circleProgress={circleProgress}
+        totalTime={totalTime}
+        animationPause={animationPause}
+        minutes={minutes}
+        seconds={seconds}
       /> 
       <section className='flex flex-col w-full gap-4'>
         <div className='flex gap-10 justify-center'>
-          <button type='button' aria-label='stop' onClick={()=> (reset as ()=> void)()}>
+          <button type='button' aria-label='stop' onClick={()=> reset()}>
             <Stop className={`icon icon--${color}`} />
           </button>
           <div>
             {!startButton 
               ? (!isRunning ?
-                  <button aria-label='play' onClick={()=> (pause as ()=> void)()}>
+                  <button aria-label='play' onClick={()=> pause()}>
                     <Play className={`icon icon--${color}`} />
                   </button>
                 :
-                  <button aria-label='pause' onClick={()=> (pause as ()=> void)()}>
+                  <button aria-label='pause' onClick={()=> pause()}>
                     <Pause className={`icon icon--${color}`} />
                   </button>
                 ) 
               : 
-              <button aria-label='start' onClick={()=> (start as ()=> void)()}>
+              <button aria-label='start' onClick={()=> start()}>
                 <Play className={`icon icon--${color}`} />
               </button>
             }
           </div>
-          <button aria-label='next' onClick={()=> (next as ()=> void)()}>
+          <button aria-label='next' onClick={()=> next()}>
             <Next className={`icon icon--${color}`} />
           </button>
         </div>
