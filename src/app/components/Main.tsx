@@ -6,6 +6,7 @@ import Timer from "./Timer";
 import { useAlarm } from "../hooks/useAlarm";
 import { Config } from '../components/svgs';
 import { salsa } from '../fonts';
+import { useTimer } from "../hooks/useTimer";
 
 export type SoundType = "alarm" | "alarmDouble" | "bells" | "longBells" | "complete" | "note";
 
@@ -55,25 +56,25 @@ export default function Main() {
   }
   
   return(
-    <main className={`flex justify-center ${color}-background h-full items-center`}>
-      <div className={`flex h-screen max-w-sm flex-col items-center justify-between p-5 ${color}-background max-h-hd`}>
-      <section className='flex flex-col w-full justify-around gap-10'>
-        <div className='flex w-full justify-between'>
-          <h1 className={`${salsa.className} antialiased text-2xl text-white`} >Easy pomodoro</h1>
-          <button id="settings" aria-label='Settings' onClick={() => setModal(true)}>
-            <Config className="config" />
-          </button>
-        </div>
-      </section>
+    <main className={`flex flex-col justify-center ${color}-background h-full items-center`}>
+      <div className={`flex h-screen max-w-sm flex-col items-center justify-between ${color}-background max-h-hd p-5`}>
+        <section className='flex flex-col w-full justify-around gap-10'>
+          <div className='flex w-full justify-between'>
+            <h1 className={`${salsa.className} antialiased text-2xl text-white`} >Easy pomodoro</h1>
+            <button id="settings" aria-label='Settings' onClick={() => setModal(true)}>
+              <Config className="config" />
+            </button>
+          </div>
+        </section>
       {modal && 
-        <div className="w-screen h-screen fixed z-20 bg-transparent">
+        <section className="w-screen h-screen fixed z-20 bg-transparent">
           <form onSubmit={handleSubmit} className={`flex flex-col text-lg ${color}-primary modal w-80 p-4 h-5/6 rounded-lg justify-between`}>
-            <div> {/* Header */}
+            <article> {/* Header */}
               <div className={`absolute right-4 py-0 px-2 rounded-full text-white cursor-pointer hover:bg-white hover:text-black transition-all ease-in duration-300`}>
                 <span onClick={() => {setModal(false), setTimerValue(initialTimer)}}>X</span>
               </div>
               <h2 className="text-white text-lg">Settings</h2>
-            </div>
+            </article>
             <div className="flex flex-col gap-6"> {/* Options */}
               <article className= "flex flex-col gap-4">
                 <div>
@@ -123,7 +124,7 @@ export default function Main() {
             </div> {/* Footer */}
             <button className={`p-2 rounded-lg ${color}-light font-bold text-black shadow-custom active:shadow-active hover:bg-white transition-all ease-out 2seg duration-700`} type="submit">Save changes</button>
           </form>
-        </div>
+        </section>
       }
       <Timer
         pomodoroMinutes={pomodoroMinutes}
