@@ -3,10 +3,10 @@
 import { useState, useEffect } from "react";
 import { useAlarm } from "./useAlarm";
 
-import { TimerProps } from "../components/Timer";
+import { TimerProps } from "../types/componentTypes";
 
 export function useTimer({pomodoroMinutes, breakMinutes, longBreakMinutes, alarmSound}: TimerProps) {
-    //State pomodoro(true) or break(false)
+  //State pomodoro(true) or break(false)
   const [intervalState, setIntervalState] = useState<boolean>(true);
   //Set initial time
   const [minutes, setMinutes] = useState<number>(pomodoroMinutes);
@@ -118,5 +118,18 @@ export function useTimer({pomodoroMinutes, breakMinutes, longBreakMinutes, alarm
     //Start Break
   }
 
-  return [start, reset, pause, next, startButton, isRunning, circleProgress, totalTime, animationPause, minutes, seconds, currentPomodoro] as const;
+  return [
+    start,
+    reset,
+    pause,
+    next,
+    startButton,
+    isRunning,
+    circleProgress,
+    totalTime,
+    animationPause,
+    minutes,
+    seconds,
+    currentPomodoro
+  ] as const;
 }

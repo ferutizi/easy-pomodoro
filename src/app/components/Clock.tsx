@@ -1,15 +1,5 @@
 import './Clock.scss';
-import { Theme } from "../context/ThemeContext";
-
-interface ClockProps {
-  color: Theme,
-  circleProgress: boolean,
-  totalTime: number | undefined,
-  animationPause: boolean,
-  minutes: number,
-  seconds: number
-}
-
+import { ClockProps } from '../types/componentTypes';
 export default function Clock({color, circleProgress, totalTime, animationPause, minutes, seconds}: ClockProps) {
   return(
     <section className='timer--clock'>

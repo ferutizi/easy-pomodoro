@@ -9,7 +9,7 @@ import { useContext } from 'react';
 import ThemeContext from '../context/ThemeContext';
 import { Next, Pause, Play, Stop } from './svgs';
 import { useTimer } from '../hooks/useTimer';
-import { SoundType } from './Main';
+import { TimerProps } from '../types/componentTypes';
 import Pomodoros from './Pomodoros';
 import './Clock'
 import Clock from './Clock';
@@ -20,16 +20,21 @@ declare module 'react' {
   }
 }
 
-export interface TimerProps {
-  pomodoroMinutes: number;
-  breakMinutes: number;
-  longBreakMinutes: number;
-  alarmSound: SoundType;
-}
-
 export default function Timer({pomodoroMinutes, breakMinutes, longBreakMinutes, alarmSound}: TimerProps) {
-
-  const [start, reset, pause, next, startButton, isRunning, circleProgress, totalTime, animationPause, minutes, seconds, currentPomodoro] = useTimer({pomodoroMinutes, breakMinutes, longBreakMinutes, alarmSound});
+  const [
+    start,
+    reset,
+    pause,
+    next,
+    startButton,
+    isRunning,
+    circleProgress,
+    totalTime,
+    animationPause,
+    minutes,
+    seconds,
+    currentPomodoro
+  ] = useTimer({pomodoroMinutes, breakMinutes, longBreakMinutes, alarmSound});
   
   const { theme } = useContext(ThemeContext);
   const color = theme.color;
