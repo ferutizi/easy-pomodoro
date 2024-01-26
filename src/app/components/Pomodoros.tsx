@@ -2,7 +2,7 @@ import React from 'react';
 import '../sass/_variables.scss';
 import './colors.scss';
 import './Timer.scss';
-import { Theme } from '../context/ThemeContext';
+import { Theme } from '../types/componentTypes';
 
 interface PomodorosProps {
   currentPomodoro: number;

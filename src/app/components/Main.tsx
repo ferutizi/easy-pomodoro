@@ -3,6 +3,7 @@
 import { ChangeEvent, useContext, useState } from "react";
 import ThemeContext from '../context/ThemeContext';
 import Timer from "./Timer";
+import TimerInput from "./TimerInput";
 import { useAlarm } from "../hooks/useAlarm";
 import { Config } from '../components/svgs';
 import { salsa } from '../fonts';
@@ -59,7 +60,7 @@ export default function Main() {
       <div className={`flex h-screen max-w-sm flex-col items-center justify-between ${color}-background max-h-hd p-5`}>
         <section className='flex flex-col w-full justify-around gap-10'>
           <div className='flex w-full justify-between'>
-            <h1 className={`${salsa.className} antialiased text-2xl text-white`} >Easy pomodoro</h1>
+            <h1 className={`${salsa.className} antialiased text-2xl text-white`}>Easy pomodoro</h1>
             <button id="settings" aria-label='Settings' onClick={() => setModal(true)}>
               <Config className="config" />
             </button>
@@ -81,15 +82,24 @@ export default function Main() {
                     <hr style={{borderColor: "white"}}></hr>
                   </div>
                   <div className="flex flex-col items-center gap-4">
-                      <label className="flex items-center justify-between w-64 text-base text-white focus-within:text-lg transition-all ease-in duration-300"> Pomodoros
-                        <input className={`w-20 h-8 text-xl text-black rounded text-center ps-3 ${color}-light outline-none focus:bg-white`} name="pomodoro" type="number" value={timerValue.pomodoro} onChange={handleChange} min={1} max={120} />
-                      </label>                  
-                      <label className="flex items-center justify-between w-64 text-base text-white focus-within:text-lg transition-all ease-in duration-300"> Breaks
-                        <input className={`w-20 h-8 text-xl text-black rounded text-center ps-3 ${color}-light outline-none focus:bg-white`} name="break" type="number" value={timerValue.break} onChange={handleChange} min={1} max={120} />
-                      </label>                  
-                      <label className="flex items-center justify-between w-64 text-base text-white focus-within:text-lg transition-all ease-in duration-300"> Long breaks
-                        <input className={`w-20 h-8 text-xl text-black rounded text-center ps-3 ${color}-light outline-none focus:bg-white`} name="longBreak" type="number" value={timerValue.longBreak} onChange={handleChange} min={1} max={120} />
-                      </label>                  
+                    <TimerInput
+                      name="pomodoro"
+                      label="Pomodoros"
+                      value={timerValue.pomodoro}
+                      onChange={handleChange}
+                    />
+                    <TimerInput
+                      name="break"
+                      label="Breaks"
+                      value={timerValue.break}
+                      onChange={handleChange}
+                    />
+                    <TimerInput
+                      name="longBreak"
+                      label="LongBreaks"
+                      value={timerValue.longBreak}
+                      onChange={handleChange}
+                    />                
                   </div>
                 </article>
                 <article className= "flex flex-col gap-4"> 
@@ -109,7 +119,7 @@ export default function Main() {
                       </button>
                     </div>
                     <div className="flex items-center justify-between w-64 text-base text-black transition-all ease-in duration-300">
-                      <select disabled={!soundOn} className={`w-40 h-8 text-xl text-black rounded ${color}-light outline-none focus:bg-white`} onChange={(e) => setAlarmSound(e.target.value)} defaultValue={'note'}>
+                      <select disabled={!soundOn} className={`w-40 h-8 text-xl pl-1 text-black rounded ${color}-light outline-none cursor-pointer focus:bg-white`} onChange={(e) => setAlarmSound(e.target.value)} defaultValue={alarmSound}>
                         <option value='alarm'>Alarm</option>
                         <option value='alarmDouble'>Alarm Double</option>
                         <option value='bells'>Bells</option>
