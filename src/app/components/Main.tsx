@@ -80,22 +80,16 @@ export default function Main() {
                   <h2 className="text-white text-center text-xl pl-0">Timer</h2>
                   <hr style={{borderColor: "white"}}></hr>
                 </div>
-                <div className="flex flex-col items-center">
-                  <div className={`flex items-center p-2 ${color}-primary`}>
+                <div className="flex flex-col items-center gap-4">
                     <label className="flex items-center justify-between w-64 text-base text-white focus-within:text-lg transition-all ease-in duration-300"> Pomodoros
                       <input className={`w-20 h-8 text-xl text-black rounded text-center ps-3 ${color}-light outline-none focus:bg-white`} name="pomodoro" type="number" value={timerValue.pomodoro} onChange={handleChange} min={1} max={120} />
-                    </label>
-                  </div>
-                  <div className={`flex items-center p-2 ${color}-primary`}>
+                    </label>                  
                     <label className="flex items-center justify-between w-64 text-base text-white focus-within:text-lg transition-all ease-in duration-300"> Breaks
                       <input className={`w-20 h-8 text-xl text-black rounded text-center ps-3 ${color}-light outline-none focus:bg-white`} name="break" type="number" value={timerValue.break} onChange={handleChange} min={1} max={120} />
-                    </label>
-                  </div>
-                  <div className={`flex items-center p-2 ${color}-primary`}>
+                    </label>                  
                     <label className="flex items-center justify-between w-64 text-base text-white focus-within:text-lg transition-all ease-in duration-300"> Long breaks
                       <input className={`w-20 h-8 text-xl text-black rounded text-center ps-3 ${color}-light outline-none focus:bg-white`} name="longBreak" type="number" value={timerValue.longBreak} onChange={handleChange} min={1} max={120} />
-                    </label>
-                  </div>
+                    </label>                  
                 </div>
               </article>
               <article className= "flex flex-col gap-4"> 
@@ -103,7 +97,7 @@ export default function Main() {
                   <h2 className="text-white text-center text-xl pl-0">Sounds</h2>
                   <hr style={{borderColor: "white"}}></hr>
                 </div>
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center gap-2">
                   <div className={`flex items-center p-2 ${color}-primary`}>
                     <p className="flex items-center justify-between w-44 text-base text-white focus-within:text-lg transition-all ease-in duration-300">Play alarm</p>
                     <button
@@ -114,18 +108,16 @@ export default function Main() {
                       {soundOn ? 'ON' : 'OFF'}
                     </button>
                   </div>
-                  <div className={`flex items-center p-2 ${color}-primary`}>
-                    <div className="flex items-center justify-between w-64 text-base text-black transition-all ease-in duration-300">
-                      <select disabled={!soundOn} className={`w-40 h-8 text-xl text-black rounded ${color}-light outline-none focus:bg-white`} onChange={(e) => setAlarmSound(e.target.value)} defaultValue={'note'}>
-                        <option value='alarm'>Alarm</option>
-                        <option value='alarmDouble'>Alarm Double</option>
-                        <option value='bells'>Bells</option>
-                        <option value='longBells'>Long Bells</option>
-                        <option value='complete'>Complete</option>
-                        <option value='note'>note</option>
-                      </select>
-                      <button disabled={!soundOn} type="button" className={`w-20 h-8 text-xl text-black rounded text-center ${color}-light outline-none focus:bg-white ${!soundOn && 'opacity-70'}`} onClick={() => playSound(alarmSound)}>Play</button>
-                    </div>
+                  <div className="flex items-center justify-between w-64 text-base text-black transition-all ease-in duration-300">
+                    <select disabled={!soundOn} className={`w-40 h-8 text-xl text-black rounded ${color}-light outline-none focus:bg-white`} onChange={(e) => setAlarmSound(e.target.value)} defaultValue={'note'}>
+                      <option value='alarm'>Alarm</option>
+                      <option value='alarmDouble'>Alarm Double</option>
+                      <option value='bells'>Bells</option>
+                      <option value='longBells'>Long Bells</option>
+                      <option value='complete'>Complete</option>
+                      <option value='note'>note</option>
+                    </select>
+                    <button disabled={!soundOn} type="button" className={`w-20 h-8 text-xl text-black rounded text-center ${color}-light outline-none focus:bg-white ${!soundOn && 'opacity-70'}`} onClick={() => playSound(alarmSound)}>Play</button>
                   </div>
                 </div>
               </article>
