@@ -21,7 +21,7 @@ export function useTimer({pomodoroMinutes, breakMinutes, longBreakMinutes, alarm
 
   const [playSound] = useAlarm();
 
-    //Setting Time from Main.tsx
+  //Setting Time from Main.tsx
   useEffect(() => {
     setMinutes(pomodoroMinutes);
   }, [pomodoroMinutes]);

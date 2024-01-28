@@ -22,6 +22,7 @@ export default function Main() {
     initialTimer,
     sound: 'note',
   }
+  
   const [
     settings,
     handleChange,
