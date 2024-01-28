@@ -26,3 +26,14 @@ export type ThemeContextType = {
   theme: Theme;
   setTheme: Dispatch<SetStateAction<Theme>>;
 };
+
+export interface TimerValues {
+  pomodoro: number;
+  break: number;
+  longBreak: number;
+}
+
+export interface SettingsProps {
+  initialTimer: TimerValues;
+  sound: string,
+}

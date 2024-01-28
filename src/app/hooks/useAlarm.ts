@@ -11,7 +11,6 @@ export function useAlarm() {
   const [playNote] = useSound(note);
 
   const playSound = (alarmSound: any) => {
-    console.log('first')
     alarmSound === 'alarm' && playAlarm();
     alarmSound === 'alarmDouble' && playAlarmDouble();
     alarmSound === 'bells' && playBells();
