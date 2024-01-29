@@ -7,7 +7,7 @@ export type Theme = {
 }
 
 export interface ClockProps {
-  color: Theme,
+  color: Theme['color'],
   circleProgress: boolean,
   totalTime: number | undefined,
   animationPause: boolean,

@@ -6,7 +6,7 @@ import { Theme } from '../types/componentTypes';
 
 interface PomodorosProps {
   currentPomodoro: number;
-  color: Theme;
+  color: Theme['color'];
 }
 
 export default function Pomodoros({currentPomodoro, color}: PomodorosProps) {
