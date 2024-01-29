@@ -9,7 +9,7 @@ import { useContext } from 'react';
 import ThemeContext from '../context/ThemeContext';
 import { Next, Pause, Play, Stop } from './svgs';
 import { useTimer } from '../hooks/useTimer';
-import { TimerProps } from '../types/componentTypes';
+import { ThemeContextType, TimerProps, Theme } from '../types/componentTypes';
 import Pomodoros from './Pomodoros';
 import './Clock'
 import Clock from './Clock';
@@ -36,14 +36,14 @@ export default function Timer({pomodoroMinutes, breakMinutes, longBreakMinutes, 
     currentPomodoro
   ] = useTimer({pomodoroMinutes, breakMinutes, longBreakMinutes, alarmSound});
   
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext) as ThemeContextType;
   const color = theme.color;
 
   return (
     <>
-      <Pomodoros currentPomodoro={currentPomodoro} color={color}/>
+      <Pomodoros currentPomodoro={currentPomodoro} color={{color}}/>
       <Clock 
-        color={color}
+        color={{color}}
         circleProgress={circleProgress}
         totalTime={totalTime}
         animationPause={animationPause}
