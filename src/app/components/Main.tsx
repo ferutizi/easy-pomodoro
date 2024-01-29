@@ -8,6 +8,7 @@ import { useAlarm } from "../hooks/useAlarm";
 import { Config } from '../components/svgs';
 import { salsa } from '../fonts';
 import useSettings from "../hooks/useSettings";
+import { SoundType } from "../types/componentTypes";
 
 export default function Main() {
   const initialTimer = {
@@ -141,7 +142,7 @@ export default function Main() {
           pomodoroMinutes={pomodoroMinutes}
           breakMinutes={breakMinutes}
           longBreakMinutes={longBreakMinutes}
-          alarmSound={alarmSound}
+          alarmSound={alarmSound as SoundType}
         />
       </div>
     </main>
