@@ -1,6 +1,7 @@
-# Supermarket-list
+# Easy Pomodoro
 
 Aplicación de la técnica Pomodoro. Con configuración personalizable de tiempo, alarma sonora, y diferentes temas de colores.
+Podés utilizarla [ACA](https://easy-pomodoro-one.vercel.app/)
 
 ## Tecnologías utilizadas
 
@@ -8,6 +9,15 @@ Aplicación de la técnica Pomodoro. Con configuración personalizable de tiempo
 - TypeScript
 - Tailwind CSS
 - Sass
+
+## Funcionalidades
+
+[x] Temporizador cuenta atrás para pomodoro, break y long break
+[x] Contador visual del pomodoro actual
+[x] Reseteo automático y manual
+[x] Configuración personalizada de tiempo para pomodoro, break y long break
+[x] Configuración del sonido de la alarma sonora
+[x] Selector del color del tema
 
 ## Configuracion inicial
 
