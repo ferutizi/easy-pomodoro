@@ -12,12 +12,12 @@ Podés utilizarla [ACA](https://easy-pomodoro-one.vercel.app/)
 
 ## Funcionalidades
 
-[x] Temporizador cuenta atrás para pomodoro, break y long break
-[x] Contador visual del pomodoro actual
-[x] Reseteo automático y manual
-[x] Configuración personalizada de tiempo para pomodoro, break y long break
-[x] Configuración del sonido de la alarma sonora
-[x] Selector del color del tema
+- [x] Temporizador cuenta atrás para pomodoro, break y long break
+- [x] Contador visual del pomodoro actual
+- [x] Reseteo automático y manual
+- [x] Configuración personalizada de tiempo para pomodoro, break y long break
+- [x] Configuración del sonido de la alarma sonora
+- [x] Selector del color del tema
 
 ## Configuracion inicial
 
